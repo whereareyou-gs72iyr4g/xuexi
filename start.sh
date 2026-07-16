@@ -23,7 +23,18 @@ sleep 3
 
 if [ ! -f /root/.mysql_initialized ]; then
 
-    echo "[3] First MySQL initialization"
+    
+echo "[3] Starting Nacos..."
+
+if [ -f /opt/nacos-server/bin/startup.sh ]; then
+    cd /opt/nacos-server/bin
+    ./startup.sh -m standalone
+    cd /workspace
+fi
+
+
+echo "[4] MySQL initialization..."
+
 
     /usr/local/bin/mysql-init.sh
 

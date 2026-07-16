@@ -61,6 +61,15 @@ RUN cd /tmp \
     && npm install
 
 
+
+
+RUN apt-get install -y unzip wget
+
+RUN wget -q https://github.com/alibaba/nacos/releases/download/2.4.3/nacos-server-2.4.3.zip     -O /tmp/nacos.zip     && unzip /tmp/nacos.zip -d /opt     && mv /opt/nacos /opt/nacos-server
+
+ENV NACOS_HOME=/opt/nacos-server
+
+
 COPY start.sh /usr/local/bin/start.sh
 
 COPY mysql-init.sh /usr/local/bin/mysql-init.sh
