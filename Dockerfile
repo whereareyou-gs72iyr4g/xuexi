@@ -42,6 +42,11 @@ RUN cd /tmp/bootstrap/spring-ai-demo \
 RUN cd /tmp/bootstrap/java-extra \
     && mvn dependency:go-offline
 
+COPY bootstrap/spring-cloud-alibaba-demo /tmp/bootstrap/spring-cloud-alibaba-demo
+
+RUN cd /tmp/bootstrap/spring-cloud-alibaba-demo \
+    && mvn dependency:go-offline
+
 
 RUN npm config set registry https://registry.npmmirror.com
 
