@@ -1,0 +1,10 @@
+{
+  "name": "devbox-node-cache",
+  "version": "1.0.0",
+  "dependencies": {
+    "typescript": "latest",
+    "vite": "latest",
+    "axios": "latest",
+    "eslint": "latest"
+  }
+}
