@@ -70,6 +70,26 @@ RUN wget -q https://github.com/alibaba/nacos/releases/download/2.4.3/nacos-serve
 ENV NACOS_HOME=/opt/nacos-server
 
 
+
+
+RUN apt-get update && apt-get install -y \
+    rabbitmq-server \
+    wget \
+    gnupg \
+    curl \
+    lsb-release
+
+
+# Kafka
+RUN wget -q https://archive.apache.org/dist/kafka/3.7.0/kafka_2.13-3.7.0.tgz \
+    -O /tmp/kafka.tgz \
+    && tar -xzf /tmp/kafka.tgz -C /opt \
+    && mv /opt/kafka_2.13-3.7.0 /opt/kafka
+
+
+ENV KAFKA_HOME=/opt/kafka
+
+
 COPY start.sh /usr/local/bin/start.sh
 
 COPY mysql-init.sh /usr/local/bin/mysql-init.sh

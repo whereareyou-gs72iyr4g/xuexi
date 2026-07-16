@@ -8,9 +8,43 @@ echo "======================================"
 echo ""
 
 
+
 echo "[1] Starting Redis..."
 
+
+
+
 service redis-server start
+
+
+echo "[1.5] Starting RabbitMQ..."
+
+service rabbitmq-server start || true
+
+
+echo "[1.6] Starting Kafka..."
+
+if [ -d /opt/kafka ]; then
+
+    cd /opt/kafka
+
+    if [ -f bin/zookeeper-server-start.sh ]; then
+        nohup bin/zookeeper-server-start.sh \
+        config/zookeeper.properties \
+        >/tmp/zookeeper.log 2>&1 &
+    fi
+
+    sleep 5
+
+    nohup bin/kafka-server-start.sh \
+    config/server.properties \
+    >/tmp/kafka.log 2>&1 &
+
+    cd /workspace
+
+fi
+
+
 
 
 echo "[2] Starting MySQL..."
