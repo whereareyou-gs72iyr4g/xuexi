@@ -17,6 +17,10 @@ RUN apt-get install -y \
     tmux \
     openssh-client
 
+COPY start.sh /usr/local/bin/start.sh
+
+RUN chmod +x /usr/local/bin/start.sh
+
 WORKDIR /workspace
 
-CMD ["/bin/bash"]
+CMD ["/usr/local/bin/start.sh"]
