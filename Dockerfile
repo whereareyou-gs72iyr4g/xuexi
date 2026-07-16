@@ -17,10 +17,30 @@ RUN apt-get install -y \
     tmux \
     openssh-client
 
+
+COPY settings.xml /root/.m2/settings.xml
+
+COPY bootstrap /tmp/bootstrap
+
+
+RUN cd /tmp/bootstrap/spring-demo \
+    && mvn dependency:go-offline
+
+
+RUN cd /tmp/bootstrap/spring-cloud-demo \
+    && mvn dependency:go-offline
+
+
+RUN cd /tmp/bootstrap/spring-ai-demo \
+    && mvn dependency:go-offline
+
+
 COPY start.sh /usr/local/bin/start.sh
 
 RUN chmod +x /usr/local/bin/start.sh
 
+
 WORKDIR /workspace
+
 
 CMD ["/usr/local/bin/start.sh"]
